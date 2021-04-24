@@ -1,8 +1,10 @@
 import 'Question.dart';
 
 class QuizBrain {
+  int _questionNumer = 0;
+
   //TODO: Lista de Perguntas
-  List<Question> question = [
+  List<Question> _question = [
     Question('Angola Tornou-se Independente Em 15/Fev/1987.', false),
     Question('Capital de Cuando Cubango é Menongue.', true),
     Question('Capital de Angola é Lubango..', false),
@@ -12,4 +14,20 @@ class QuizBrain {
     Question('Cuito Cuanavale, é a Capital da Provincíncia do Bié.', false),
     Question('Quando Estamos Com Fome, Em Inglês, Dizemos, I´m Hungry.', true),
   ];
+
+//Testando a ultima pergunta
+  void nextQuestion() {
+    if (_questionNumer < _question.length) {
+      _questionNumer++;
+    }
+  }
+
+//Metodos Com Retorno
+  String getQuestionText() {
+    return _question[_questionNumer].questionText;
+  }
+
+  bool getCorrectAnswer() {
+    return _question[_questionNumer].questionAnswer;
+  }
 }

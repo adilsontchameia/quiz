@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quiz/Question.dart';
+import 'package:quiz/quiz_brain.dart';
 
 void main() => runApp(Quizler());
 
@@ -31,9 +32,10 @@ class Quiz extends StatefulWidget {
 class _QuizState extends State<Quiz> {
   //TODO: Lista Vazia de Icones
   List<Icon> scoreKeeper = [];
-
   //Vai Guardar Onde Estamos Na Nossa Lista
-  int questionNumer = 0;
+
+  //Objeto de Perguntas
+  QuizBrain quizBrain = QuizBrain();
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +50,7 @@ class _QuizState extends State<Quiz> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                question[questionNumer].questionText,
+                quizBrain.getQuestionText(),
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 25.0, color: Colors.white),
               ),
@@ -62,14 +64,14 @@ class _QuizState extends State<Quiz> {
               textColor: Colors.white,
               color: Colors.green,
               onPressed: () {
-                bool correctAnswer = question[questionNumer].questionAnswer;
+                bool correctAnswer = quizBrain.getCorrectAnswer();
                 if (correctAnswer == true) {
                   print("Right");
                 } else {
                   print("Wrong");
                 }
                 setState(() {
-                  questionNumer++;
+                  quizBrain.nextQuestion();
                 });
               },
               child: Text(
@@ -86,14 +88,14 @@ class _QuizState extends State<Quiz> {
               textColor: Colors.white,
               color: Colors.red,
               onPressed: () {
-                bool correctAnswer = question[questionNumer].questionAnswer;
+                bool correctAnswer = quizBrain.getCorrectAnswer();
                 if (correctAnswer == false) {
                   print("Right");
                 } else {
                   print("Wrong");
                 }
                 setState(() {
-                  questionNumer++;
+                  quizBrain.nextQuestion();
                 });
               },
               child: Text(
