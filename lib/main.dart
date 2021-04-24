@@ -31,13 +31,6 @@ class Quiz extends StatefulWidget {
 class _QuizState extends State<Quiz> {
   //TODO: Lista Vazia de Icones
   List<Icon> scoreKeeper = [];
-  //TODO: Lista de Perguntas
-  List<Question> question = [
-    Question('Angola tornou-se verdadeiro 15/Fev/1987 ?', false),
-    Question('Capital de Cuando Cubango e Menongue. ?', true),
-    Question('Capital de Angola e Lubango?', false),
-    Question('Agostinho Neto, primeiro presidente de Angola ?', true),
-  ];
 
   //Vai Guardar Onde Estamos Na Nossa Lista
   int questionNumer = 0;
