@@ -36,6 +36,25 @@ class _QuizState extends State<Quiz> {
 
   //Objeto de Perguntas
   QuizBrain quizBrain = QuizBrain();
+  //Verificar as perguntas
+  void checkAnswer(bool userPickedAnswer) {
+    bool correctAnswer = quizBrain.getCorrectAnswer();
+    setState(() {
+      if (userPickedAnswer == correctAnswer) {
+        scoreKeeper.add(
+          Icon(
+            Icons.check,
+            color: Colors.green,
+          ),
+        );
+      } else {
+        scoreKeeper.add(
+          Icon(Icons.close, color: Colors.red),
+        );
+      }
+      quizBrain.nextQuestion();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,15 +83,7 @@ class _QuizState extends State<Quiz> {
               textColor: Colors.white,
               color: Colors.green,
               onPressed: () {
-                bool correctAnswer = quizBrain.getCorrectAnswer();
-                if (correctAnswer == true) {
-                  print("Right");
-                } else {
-                  print("Wrong");
-                }
-                setState(() {
-                  quizBrain.nextQuestion();
-                });
+                checkAnswer(true);
               },
               child: Text(
                 "Verdadeiro",
@@ -88,15 +99,7 @@ class _QuizState extends State<Quiz> {
               textColor: Colors.white,
               color: Colors.red,
               onPressed: () {
-                bool correctAnswer = quizBrain.getCorrectAnswer();
-                if (correctAnswer == false) {
-                  print("Right");
-                } else {
-                  print("Wrong");
-                }
-                setState(() {
-                  quizBrain.nextQuestion();
-                });
+                checkAnswer(false);
               },
               child: Text(
                 "Falso",
@@ -106,6 +109,7 @@ class _QuizState extends State<Quiz> {
           ),
         ),
         Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: scoreKeeper,
         ),
       ],

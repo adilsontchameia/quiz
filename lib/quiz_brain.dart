@@ -16,9 +16,11 @@ class QuizBrain {
   ];
 
 //Testando a ultima pergunta
+//-1 nao vai chegar a ultima pergunta
   void nextQuestion() {
-    if (_questionNumer < _question.length) {
+    if (_questionNumer < _question.length - 1) {
       _questionNumer++;
+      print(_question.length);
     }
   }
 
