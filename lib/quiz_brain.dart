@@ -32,4 +32,17 @@ class QuizBrain {
   bool getCorrectAnswer() {
     return _question[_questionNumer].questionAnswer;
   }
+    bool isFinished() {
+    if (_questionNumer >= _question.length - 1) {
+      print('Now returning true');
+      return true;
+
+    } else {
+      return false;
+    }
+  }
+
+  void reset() {
+    _questionNumer = 0;
+  }
 }

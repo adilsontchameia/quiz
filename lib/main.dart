@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:quiz/Question.dart';
 import 'package:quiz/quiz_brain.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 void main() => runApp(Quizler());
 
@@ -39,21 +39,36 @@ class _QuizState extends State<Quiz> {
   //Verificar as perguntas
   void checkAnswer(bool userPickedAnswer) {
     bool correctAnswer = quizBrain.getCorrectAnswer();
-    setState(() {
-      if (userPickedAnswer == correctAnswer) {
-        scoreKeeper.add(
-          Icon(
-            Icons.check,
-            color: Colors.green,
-          ),
-        );
-      } else {
-        scoreKeeper.add(
-          Icon(Icons.close, color: Colors.red),
-        );
-      }
-      quizBrain.nextQuestion();
-    });
+    setState(
+      () {
+        if (quizBrain.isFinished()) {
+          //Modified for our purposes:
+          Alert(
+            context: context,
+            title: 'Terminou!',
+            desc: 'Voce Conseguiu Respondes A Todas Perguntas !.',
+          ).show();
+
+          quizBrain.reset();
+
+          scoreKeeper = [];
+        } else {
+          if (userPickedAnswer == correctAnswer) {
+            scoreKeeper.add(
+              Icon(
+                Icons.check,
+                color: Colors.green,
+              ),
+            );
+          } else {
+            scoreKeeper.add(
+              Icon(Icons.close, color: Colors.red),
+            );
+          }
+          quizBrain.nextQuestion();
+        }
+      },
+    );
   }
 
   @override
